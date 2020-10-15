@@ -3,10 +3,8 @@ package com.example.customflowlayout
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import java.util.ArrayList
 import kotlin.math.max
 
 /**
@@ -52,10 +50,6 @@ class FlowLayout : ViewGroup {
         //保存当前控件的里面子控件的总宽高
         var childCountWidth = 0
         var childCountHeight = 0
-        Log.i("TAG", "paddingLeft: " + paddingLeft)
-        Log.i("TAG", "paddingRight: " + paddingRight)
-        Log.i("TAG", "paddingTop: " + paddingTop)
-        Log.i("TAG", "paddingBottom: " + paddingBottom)
         if (!isMeasure) {
             isMeasure = true
         } else {
@@ -147,35 +141,25 @@ class FlowLayout : ViewGroup {
                 val layoutParams = view.layoutParams as MarginLayoutParams
                 if (views.size == 1) {
                     left = countLeft + layoutParams.leftMargin + paddingLeft
-                    top = countTop + layoutParams.topMargin
                 } else {
                     if (index == 0) {
                         left = countLeft + layoutParams.leftMargin + paddingLeft
                     } else {
                         left = countLeft + layoutParams.leftMargin
                     }
-                    val i = list.indexOf(views)
-                    if (i == 0) {
-                        top = countTop + layoutParams.topMargin
-                    } else {
-                        top = countTop + layoutParams.topMargin
-                    }
                 }
 //                left = countLeft + layoutParams.leftMargin
-//                top = countTop + layoutParams.topMargin
+                top = countTop + layoutParams.topMargin
                 right = left + view.measuredWidth
                 bottom = top + view.measuredHeight
                 view.layout(left, top, right, bottom)
                 if (views.size == 1) {
-                    countLeft += +paddingLeft + view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
-
+                    countLeft += paddingLeft + view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
                 } else {
                     if (index == 0) {
-                        countLeft += +paddingLeft + view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
-
+                        countLeft += paddingLeft + view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
                     } else {
                         countLeft += view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
-
                     }
                 }
 //                countLeft += view.measuredWidth + layoutParams.leftMargin + layoutParams.rightMargin
